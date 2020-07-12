@@ -1,0 +1,103 @@
+
+https://tecadmin.net/install-mysql-on-centos-redhat-and-fedora/
+.................Mysql Installation...............
+rpm -Uvh https://repo.mysql.com/mysql80-community-release-el6-3.noarch.rpm
+sed -i 's/enabled=1/enabled=0/' /etc/yum.repos.d/mysql-community.repo
+yum --enablerepo=mysql80-community install mysql-community-server
+service mysqld start
+grep "A temporary password" /var/log/mysqld.log
+mysql_secure_installation
+
+.................Mysql Upgradtion......................
+
+Step 1) rpm -Uvh https://repo.mysql.com/mysql80-community-release-el6-3.noarch.rpm
+Step 2) sed -i 's/enabled=1/enabled=0/' /etc/yum.repos.d/mysql-community.repo
+Step 3) yum --enablerepo=mysql80-community install mysql-community-server
+Step 4) service mysqld start   (It will be failed so,go to the below stapes)
+
+Step 5) Add below variables in my.cnf file 
+        skip-grant-tables
+        innodb_data_file_path = ibdata1:10M:autoextend
+
+Step 6) service mysqld start     (sevice started succefully ok)
+Step 7) mysql_upgrade
+Step 8) then remove "skip-grant-tables" from my.cnf file
+Step 9) service mysqld start     (sevice started succefully ok)
+
+
+.....................................END...............
+
+..........Repositerory Configuration...................
+https://www.thegeekdiary.com/how-to-configure-yum-to-connect-to-oracle-public-repository-in-oracle-enterprise-linux/
+
+1) vim /etc/yum.conf
+
+[main]
+cachedir=/var/cache/yum
+keepcache=0
+debuglevel=2
+logfile=/var/log/yum.log
+distroverpkg=redhat-release
+tolerant=1
+exactarch=1
+obsoletes=1
+gpgcheck=1
+plugins=1
+installonlypkgs=kernel kernel-smp kernel-bigmem kernel-enterprise kernel-debug kernel-unsupported kernel-uek
+exclude=up2date
+
+
+2)  Change to the /etc/yum.repos.d directory.
+3)  Adding a Repository Configuration file   as      .repo  extension
+
+As per Example adding as a Oracle repository
+
+4)  In /etc/yum.repos.d, edit a new file called oracle-public-yum-ol6.repo
+# vi /etc/yum.repos.d/oracle-public-yum-ol6.repo
+[public_ol6_latest]
+name=Oracle Linux $releasever Latest ($basearch)
+baseurl=http://public-yum.oracle.com/repo/OracleLinux/OL6/latest/$basearch/
+gpgkey=http://public-yum.oracle.com/RPM-GPG-KEY-oracle-ol6
+gpgcheck=1
+enabled=1
+
+
+
+5)  Test the Repository
+Issue the following command:
+
+# yum repolist
+
+
+.......................................................
+
+
+datadir=/var/lib/mysql
+socket=/var/lib/mysql/mysql.sock
+#innodb_data_file_path=/var/lib/mysql/ibdata1:768M:autoextend
+innodb_data_file_path = ibdata1:10M:autoextend
+log-error=/var/log/mysqld.log
+pid-file=/var/run/mysqld/mysqld.pid
+innodb_fast_shutdown=1
+
+
+
+
+Retrieving key from file:///etc/pki/rpm-gpg/RPM-GPG-KEY-mysql
+
+mysql-community-client   mysql-community-client-8.0.20-1.el6.x86_64.rpm
+mysql-community-libs     mysql-community-common-8.0.20-1.el6.x86_64.rpm
+mysql-community-libs-compat mysql-community-libs-8.0.20-1.el6.x86_64.rpm
+mysql-community-server   mysql-community-libs-compat-8.0.20-1.el6.x86_64.rpm
+mysql-community-common   
+
+
+Installed:
+  mysql-community-client.x86_64 0:8.0.20-1.el6          mysql-community-libs.x86_64 0:8.0.20-1.el6          mysql-community-libs-compat.x86_64 0:8.0.20-1.el6
+  mysql-community-server.x86_64 0:8.0.20-1.el6
+
+Dependency Installed:
+  mysql-community-common.x86_64 0:8.0.20-1.el6
+
+Replaced:
+  mysql.x86_64 0:5.1.73-8.el6_8                      mysql-libs.x86_64 0:5.1.73-8.el6_8                      mysql-server.x86_64 0:5.1.73-8.el6_8
