@@ -1,0 +1,21 @@
+change master to master_host='192.168.1.101',master_user='repl',master_password='repl@123',master_auto_position=1;
+server_id=1
+log-bin=mysql_vm1-bin
+log_slave_updates=1
+#enforce_gtid_consistency=true
+#gtid_mode=on
+binlog_format=ROW
+#binlog_gtid_simple_recovery=on
+#binlog-do-db=zrmtest
+relay_log=mysql_vm1-relay-bin
+replicate-do-db=zrmtest
+#Skip_Counter=1
+#SQL_SLAVE_SKIP_COUNTER = 1
+#sql-slave-skip-counter=1
+
+super_read_only = 1;
+read_only = 1;
+
+mysqldump -udb_user -pdbuser@123 -h192.168.1.101 --set-gtid-purged=OFF --triggers --routines --events --databases zrmtest | mysql -udb_user -pdbuser@123 -h192.168.1.100
+
+create user 'rep'@'%' identified by 'rep@123';

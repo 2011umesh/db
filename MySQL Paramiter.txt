@@ -1,0 +1,9 @@
+For InnoDB Performance:
+1. innodb_file_per_table = ON
+2. innodb_flush_method = O_DIRECT (to avoid double buffering)
+3. innodb_log_file_size = 256 M is good for most use cases
+4. Innodb_log_buffer_size = 4 M is good. but tune if you are handling BLOB data
+5. Innodb_buffer_pool_size = allocate 70% - 80% of total memory
+6. Innodb_buffer_pool_instances = Min 1 and Max 64
+7. Innodb_flush_log_at_trx_commit = 2
+8. Innodb_thread_concurrency = 2 time number of CPU + number of disk
