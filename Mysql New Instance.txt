@@ -1,0 +1,210 @@
+ 751  29/05/20 11:50:30 ip addr
+  752  29/05/20 11:57:04 exit
+  753  29/05/20 14:15:06 fdisk -l
+  754  29/05/20 14:17:33 lsblk
+  755  29/05/20 14:34:29 df -Th
+  756  29/05/20 14:35:55 pvs
+  757  29/05/20 14:37:32 pvcreate /dev/vdd
+  758  29/05/20 14:38:27 vgcreate vg00 /dev/vdd
+  759  29/05/20 14:39:55  lvcreate -n data1 -l 100%FREE vg00
+  760  29/05/20 14:40:11 lvs
+  761  29/05/20 14:41:05 mkfs.ext4 /dev/vg00/data1
+  762  29/05/20 14:41:44 df -Th
+  763  29/05/20 14:41:52 lsblk
+  764  29/05/20 15:11:06 mkdir /data1
+  765  29/05/20 15:12:37 mount /dev/vdd /data1
+  766  29/05/20 15:13:00 fdisk -l
+  767  29/05/20 15:13:37 mount /dev/mapper/vg00-data1 /data1
+  768  29/05/20 15:13:42 df -Th
+  769  29/05/20 15:14:32 vi /etc/fstab
+  770  29/05/20 15:16:24 df -Th
+ 
+
+
+ 842  29/05/20 17:17:35 unset TMOUT
+  843  29/05/20 17:17:37 df -h
+  844  29/05/20 17:17:41 cd /data1/
+  845  29/05/20 17:17:43 ll
+  846  29/05/20 17:17:48 rmdir lost+found/
+  847  29/05/20 17:17:53 df -h
+  848  29/05/20 17:18:18 ps -lef | grep mysqld_safe
+  849  29/05/20 17:18:23 free -g
+  850  29/05/20 17:18:51 cat /etc/my-staging.cnf
+  851  29/05/20 17:20:01 vim /etc/my-staging1.cnf
+  852  29/05/20 17:20:34 mkdir staging
+  853  29/05/20 17:20:55 chown mysql.mysql -R staging/
+  854  29/05/20 17:20:57 ll
+  855  29/05/20 17:21:02 cd ..
+  856  29/05/20 17:21:03 ll
+  857  29/05/20 17:21:06 cd /data
+  858  29/05/20 17:21:07 ll
+  859  29/05/20 17:21:10 du -sh *
+  860  29/05/20 17:21:27 cd ..
+  861  29/05/20 17:21:31 cd data1/
+  862  29/05/20 17:21:33 ll
+  863  29/05/20 17:21:53 mysql_install_db --help
+  864  29/05/20 17:22:11 mysql_install_db --datadir=/data1/staging/
+  865  29/05/20 17:24:10 ll
+  866  29/05/20 17:24:14 cd staging/
+  867  29/05/20 17:24:15 ll
+  868  29/05/20 17:24:52 mysql_install_db --defaults-file=/etc/my-staging1.cnf
+  869  29/05/20 17:25:07 mysqld --defaults-file=/etc/my-staging1.cnf
+  870  29/05/20 17:25:11 ll
+  871  29/05/20 17:25:23 mysqld --initialize --defaults-file=/etc/my-staging1.cnf
+  872  29/05/20 17:25:38 ll
+  873  29/05/20 17:25:40 pwd
+  874  29/05/20 17:26:11 mkdir data
+  875  29/05/20 17:26:16 chown mysql.mysql -R data/
+  876  29/05/20 17:26:19 mysqld --initialize --defaults-file=/etc/my-staging1.cnf
+  877  29/05/20 17:26:44 mysqld --help
+  878  29/05/20 17:26:54 mysqld --help --verbose
+  879  29/05/20 17:28:48 mysqld --initialize --defaults-file=/etc/my-staging1.cnf  --datadir=/data1/staging/
+  880  29/05/20 17:28:53 mysqld --initialize --defaults-file=/etc/my-staging1.cnf  --datadir=/data1/staging/data/
+  881  29/05/20 17:35:32 ll
+  882  29/05/20 17:35:36 cd data/
+  883  29/05/20 17:35:38 ll
+  884  29/05/20 17:35:59 mysqld --initialize --datadir=/data1/staging/data/
+  885  29/05/20 17:37:51 ll
+  886  29/05/20 17:38:15 tailf /var/log/mysqld.log
+  887  29/05/20 17:38:30 less /var/log/mysqld.log
+  888  29/05/20 17:39:40 mysqld --verbose | less
+  889  29/05/20 17:41:27 ll
+  890  29/05/20 17:42:15 mysqld --defaults-file=/etc/my-staging1.cnf --initialize-insecure --user=mysql
+  891  29/05/20 17:42:23 ll
+  892  29/05/20 17:42:24 cd ..
+
+  893  29/05/20 17:42:28 rmdir data
+  894  29/05/20 17:42:31 mysqld --defaults-file=/etc/my-staging1.cnf --initialize-insecure --user=mysql
+  895  29/05/20 17:42:54 cd /var/lib/mysql
+  896  29/05/20 17:42:55 ll
+  897  29/05/20 17:42:58 cd ..
+  898  29/05/20 17:43:14 mysqld --initialize-insecure --user=mysql
+  899  29/05/20 17:43:27 mv /etc/my.cnf /etc/my.cnf-temp
+  900  29/05/20 17:43:30 mysqld --initialize-insecure --user=mysql
+  901  29/05/20 17:43:39 ll
+  902  29/05/20 17:43:42 cd mysql
+  903  29/05/20 17:43:44 ll
+  904  29/05/20 17:43:53 mysqld --defaults-file=/etc/my-staging1.cnf --initialize-insecure --user=mysql
+  905  29/05/20 17:44:15 mv /etc/my.cnf-temp /etc/my.cnf
+  906  29/05/20 17:44:17 ll
+  907  29/05/20 17:44:41 cd ..
+  908  29/05/20 17:44:55 mv mysql /data1/staging/
+  909  29/05/20 17:45:00 cd /data1/staging/
+  910  29/05/20 17:45:01 ll
+  911  29/05/20 17:45:06 mkdir data
+  912  29/05/20 17:45:12 mv mysql/ db
+  913  29/05/20 17:45:15 mv data/ db/
+  914  29/05/20 17:45:28 ll
+  915  29/05/20 17:45:34 cd db/
+  916  29/05/20 17:45:34 ll
+  917  29/05/20 17:45:36 cd ..
+  918  29/05/20 17:45:37 ll
+  919  29/05/20 17:45:40 mkdir data
+  920  29/05/20 17:45:42 mv db data/
+  921  29/05/20 17:45:43 ll
+  922  29/05/20 17:45:46 mkdir temp
+  923  29/05/20 17:45:48 mkdir lgos
+  924  29/05/20 17:45:51 rmdir lgos/
+  925  29/05/20 17:49:33 mkdir logs
+  926  29/05/20 17:49:34 ll
+  927  29/05/20 17:49:40 mkdir redo
+  928  29/05/20 17:49:46 cd data/
+  929  29/05/20 17:49:46 ll
+  930  29/05/20 17:49:48 cd db/
+  931  29/05/20 17:49:49 ll
+  932  29/05/20 17:50:06 mv ib_logfile* ../../redo/
+  933  29/05/20 17:50:07 ll
+  934  29/05/20 17:50:15 cd ..
+  935  29/05/20 17:52:10 ll -h
+  936  29/05/20 17:52:13 cd db/
+  937  29/05/20 17:52:15 ll -h
+  938  29/05/20 17:52:30 cd data/
+  939  29/05/20 17:52:32 ll
+  940  29/05/20 17:52:33 cd ..
+  941  29/05/20 17:52:35 rmdir data/
+  942  29/05/20 17:52:36 ll
+  943  29/05/20 17:52:45 cd ..
+  944  29/05/20 17:52:46 ll
+  945  29/05/20 17:52:49 pwd
+  946  29/05/20 17:52:50 cd ..
+  947  29/05/20 17:52:52 ll
+  948  29/05/20 17:52:54 cd data/
+  949  29/05/20 17:52:58 mv db db-old
+  950  29/05/20 17:52:59 cd
+  951  29/05/20 17:53:13 mv /etc/my.cnf /etc/my.cnf-temp
+  952  29/05/20 17:55:42 mv /etc/my-staging1.cnf /etc/my.cnf
+  953  29/05/20 17:55:57 mysqld --initialize-insecure --user=mysql
+  954  29/05/20 17:56:15 cd /data1/
+  955  29/05/20 17:56:16 ll
+  956  29/05/20 17:56:19 cd staging/
+  957  29/05/20 17:56:21 ll
+  958  29/05/20 17:56:25 cd data/
+  959  29/05/20 17:56:26 ll
+  960  29/05/20 17:56:32 mv db-old/ /data1/
+  961  29/05/20 17:56:37 mysqld --initialize-insecure --user=mysql
+  962  29/05/20 17:56:58 cat /etc/my.cnf | grep data
+  963  29/05/20 17:58:50 vim /etc/my.cnf
+  964  29/05/20 17:59:40 mysqld --initialize-insecure --user=mysql
+  965  29/05/20 17:59:51 touch /data1/staging/logs/error/mysql.err
+  966  29/05/20 18:00:04 mkdir -p /data1/staging/logs/error/
+  967  29/05/20 18:00:05 touch /data1/staging/logs/error/mysql.err
+  968  29/05/20 18:00:11 cd /data1/
+  969  29/05/20 18:00:19 chown mysql.mysql -R *
+  970  29/05/20 18:00:24 mysqld --initialize-insecure --user=mysql
+  971  29/05/20 18:01:39 ll
+  972  29/05/20 18:01:43 cd staging/
+  973  29/05/20 18:01:43 ll
+  974  29/05/20 18:01:45 cd data/
+  975  29/05/20 18:01:46 ll
+  976  29/05/20 18:01:49 cd db/
+  977  29/05/20 18:01:50 ll
+  978  29/05/20 18:01:56 ll -h
+  979  29/05/20 18:01:58 cd ..
+  980  29/05/20 18:02:07 cd redo/
+  981  29/05/20 18:02:08 ll
+  982  29/05/20 18:02:10 ll -h
+  983  29/05/20 18:02:31 mv /etc/my.cnf /etc/my-staging1..cnf
+  984  29/05/20 18:02:40 mv /etc/my.cnf-temp /etc/my.cnf
+  985  29/05/20 18:03:17 mysqld_safe --defaults-file=/etc/my-staging1..cnf &
+  986  29/05/20 18:03:28 tailf /data1/staging/logs/error/mysql.err
+  987  29/05/20 18:04:05 mysql_secure_installation --help
+  988  29/05/20 18:04:26 mysql_secure_installation -S /data1/staging/data/db/mysql.sock
+  989  29/05/20 18:05:15 mysql -S /data1/staging/data/db/mysql.sock
+  990  29/05/20 18:05:20 mysql -S /data1/staging/data/db/mysql.sock -uroot -p
+  991  29/05/20 18:20:21 mysql -S /data/preprod/data/db/mysql.sock -uroot -p
+  992  29/05/20 18:20:29 mysql -S /data/preprod/data/db/mysql.sock -udbadm -p
+  993  29/05/20 18:21:06 mysql -S /data1/staging/data/db/mysql.sock -udbadm -p
+  994  30/05/20 13:22:14 history
+
+
+
+shell> groupadd mysql
+shell> useradd -r -g mysql -s /bin/false mysql
+shell> cd /usr/local
+shell> tar zxvf /path/to/mysql-VERSION-OS.tar.gz
+shell> ln -s full-path-to-mysql-VERSION-OS mysql
+shell> cd mysql
+shell> mkdir mysql-files
+shell> chown mysql:mysql mysql-files
+shell> chmod 750 mysql-files
+shell> bin/mysqld --initialize --user=mysql
+shell> bin/mysql_ssl_rsa_setup
+shell> bin/mysqld_safe --user=mysql &
+# Next command is optional
+shell> cp support-files/mysql.server /etc/init.d/mysql.server
+
+
+log-error=/data/preprod/logs/error/mysql.err
+sql_mode = traditional
+https://lalitvc.wordpress.com/2019/03/04/mysql-5-7-binary-install-on-linux/
+
+
+
+mysqld --initialize-insecure --user=mysql  --explicit_defaults_for_timestamp --datadir=/mysql1/mysql1/data/
+mysqld_safe --skip-grant-tables --explicit_defaults_for_timestamp
+ mysqld_safe --skip-grant-tables
+update user set authentication_string=password('root@123') where user='root';
+
+http://212.199.163.188/all/mysql/64-bit/5.6.17/MySQL-client-5.6.17-1.linux_glibc2.5.x86_64.rpm
+
+ln -sf /opt/glibc-2.14/lib/libc-2.14.so /lib64/libc.so.6
