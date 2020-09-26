@@ -1,0 +1,9 @@
+ CREATE TABLE tblvm1fed (name varchar(10) DEFAULT NULL,dt datetime DEFAULT CURRENT_TIMESTAMP) ENGINE = FEDERATED
+CONNECTION='mysql://db_user@192.168.1.102:3306/vm2fed/tblvm2fed';
+
+insert into tblvm2fed(name) values('Umesh') 
+
+
+CREATE SERVER fedlink FOREIGN DATA WRAPPER mysql OPTIONS (USER 'db_user', HOST '192.168.1.102', DATABASE 'zrmtest', PORT '3306',Password 'dbuser@123');
+
+CREATE TABLE student_fed(sid int,sname VARCHAR(32)) ENGINE=FEDERATED CONNECTION='fedlink';
