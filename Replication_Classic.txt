@@ -1,3 +1,4 @@
+https://mysqlhighavailability.com/mysql-group-replication-a-quick-start-guide/
 https://www.digitalocean.com/community/tutorials/how-to-set-up-master-slave-replication-in-mysql
 
 https://www.redips.net/mysql/add-new-slave/
