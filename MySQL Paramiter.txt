@@ -8,7 +8,7 @@ For InnoDB Performance:
 7. Innodb_flush_log_at_trx_commit = 2
 8. Innodb_thread_concurrency = 2 time number of CPU + number of disk
 
-.................................
+..........https://mysqlhighavailability.com/mysql-group-replication-a-quick-start-guide/.......................
 
 # only the last two sub-sections are directly related to Group Replication
 [mysqld]
