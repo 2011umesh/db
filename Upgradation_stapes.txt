@@ -1,0 +1,49 @@
+..........................standalone.......94-95-98...........87-89.....................
+
+Steps to upgrade standalone
+
+1)  cp /etc/my.cnf /etc/my.cnf.upgrade
+2)  /etc/init.d/mysqld stop
+3)  rpm -e --nodeps mysql-commercial-client mysql-commercial-common mysql-commercial-libs-compat mysql-commercial-libs mysql-commercial-server
+4)  rpm -ivh mysql-commercial-*
+5)  mv /etc/my.cnf.upgrade /etc/my.cnf
+6)  skip_networking=1
+7)  /etc/init.d/mysqld start
+8)  mysql_upgrade -uumesh -p>upgrade7532.log                    a3e)XEFA(4fNkM
+9)  skip_networking=0
+10) Restart the service (without skip networking) stop/start
+
+
+.........................Cluster – Active node..........83-91-106.......86-85..............
+
+Steps to upgrade Cluster – Active node
+
+
+1)  cp /etc/my.cnf /etc/my.cnf.upgrade
+2) /etc/init.d/rgmanager stop
+3) rpm -e --nodeps mysql-commercial-client mysql-commercial-common mysql-commercial-libs-compat mysql-commercial-libs mysql-commercial-server
+4)  rpm -ivh mysql-commercial-*
+5)  mv /etc/my.cnf.upgrade /etc/my.cnf
+Start the service (with skip networking)
+6) /etc/init.d/rgmanager start
+7) mysql_upgrade -uumesh -p>upgrade7532.log
+ReStart the service (without skip networking)
+8)/etc/init.d/rgmanager stop
+9)/etc/init.d/rgmanager start
+
+
+
+........................luster – Passive node...................................
+
+Steps to upgrade Cluster – Passive node
+
+
+1)  cp /etc/my.cnf /etc/my.cnf.upgrade
+2) /etc/init.d/rgmanager stop
+3) rpm -e --nodeps mysql-commercial-client mysql-commercial-common mysql-commercial-libs-compat mysql-commercial-libs mysql-commercial-server
+4)  rpm -ivh mysql-commercial-*
+5)  mv /etc/my.cnf.upgrade /etc/my.cnf
+6)  Start the service (AFTER UPGRADIN IN ACTIVE NODE)   /etc/init.d/rgmanager start
+
+
+could not create the upgrade info file '/mysql/data/db/mysql_upgrade_info' in the MySQL Servers datadir, errno: 13
