@@ -1,0 +1,29 @@
+
+#ps -lef|grep -i mysql
+#select * from information_schema.processlist where command!='sleep';
+#SELECT OBJECT_SCHEMA,OBJECT_NAME,GROUP_CONCAT(DISTINCT EXTERNAL_LOCK) FROM performance_schema.table_handles WHERE EXTERNAL_LOCK IS NOT NULL
+GROUP BY OBJECT_SCHEMA,OBJECT_NAME;
+#show open tables where in_use > 1
+#select * from information_schema.innodb_locks;
+#show global status like'%status';
+#show global status like'%optimizer%';
+#show global status like'%thread%';
+#show global variables like '%isolation%';
+#vmstat
+#iotop
+#top
+#iostat
+#cat /etc/sysctl.conf|grep vm.swappiness
+##################Replication Problem##############
+note down relay_master_log_file and execute_master_log_position
+And then go to master
+Show binlog events in "that log" from that position limit 10;
+Show binlog events in "mysql-binlog-BI71.032407" from 587094168 limit 10;
+Here limit is very important
+If you won't give limit server will hang
+Limit must
+That's matter
+And you know about all information_schema tables?
+There it will give result table name
+In that table we need to check primary key is there or not
+If primary key not there means we have to inform respective person. So n so table primary key nog there it causing issue
