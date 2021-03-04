@@ -1,3 +1,20 @@
+.............By RPM (Install previously...............
+
+mysql_install_db --user=mysql --datadir=/mysql_staging/data/  (Need to create user table manually)
+mysqld  --defaults-file=/etc/my_staging.cnf --user=mysql &     (Start mysql demon)      
+
+skip-grant-tables   (in cnf) and stop service and start
+mysql -u root -p -P3307 -S/mysql_staging/mysql.sock    (then enter)
+FLUSH PRIVILEGES;
+ALTER USER 'root'@'localhost' IDENTIFIED BY 'new_password';
+vim /etc/my_staging.cnf    (disable #skip-grant-tables)
+mysqld  --defaults-file=/etc/my_staging.cnf --user=mysql &            (Start mysql demon)
+
+.............................. 
+ 
+ 
+ 
+ 
  751  29/05/20 11:50:30 ip addr
   752  29/05/20 11:57:04 exit
   753  29/05/20 14:15:06 fdisk -l
