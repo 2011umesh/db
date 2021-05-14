@@ -12,15 +12,16 @@ mysqld  --defaults-file=/etc/my_staging.cnf --user=mysql &            (Start mys
 
 .............................. 
 If Already One Instance is running By RPM installation 
-1)	  Copy my.cnf file 
-2)	cp /etc/my.cnf  /etc/my_archival.cnf
+1) Copy my.cnf file 
+2) cp /etc/my.cnf  /etc/my_archival.cnf
 
 Change the variable path in my_archival.cnf file  
-       3)  mysqld  --defaults-file=/etc/ my_archival.cnf --initialize --user=mysql      (Initialize datadirectory)
-       4) Capture Mysql password from mysql.err file
-       5) mysqld_safe  --defaults-file=/etc/ my_archival.cnf --user=mysql &                 (Start mysql demon)
-      6) mysql -uroot -hlocalhost -P3309
-      7) Change mysql root password
+ 3) mysqld  --defaults-file=/etc/ my_archival.cnf --initialize --user=mysql      (Initialize datadirectory)
+ 4) Capture Mysql password from mysql.err file
+ 5) mysqld_safe  --defaults-file=/etc/my_archival.cnf --user=mysql &                 (Start mysql demon)
+ 6) mysql -uroot -hlocalhost -P3309
+ 7) Change mysql root password
+ ...................................
 
 
 
